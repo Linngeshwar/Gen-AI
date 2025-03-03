@@ -9,7 +9,7 @@ class assignment:
         self.slope = slope
         self.x = x
         self.noise = noise
-        self.y = self.slope*self.x
+        self.y = self.slope*self.x + noise
     
     def visualise_data(self):
         
@@ -19,7 +19,8 @@ class assignment:
         plt.xlabel('X')
         plt.ylabel('Y')
         plt.scatter(self.x,self.y)
-        plt.plot(self.x,self.slope*self.x,color='red')
+        plt.plot(self.x,self.slope*self.x,color='red',label='y = mx + c')
+        plt.legend()
         plt.show()
     
     def linear_approach(self):
@@ -40,9 +41,10 @@ class assignment:
         plt.xlabel('X')
         plt.ylabel('Y')
         #plotting the errors
-        plt.plot(mGuess,errors)
+        plt.plot(mGuess,errors,label='Errors')
         #plotting the best slope
-        plt.plot(mBest,min(errors),marker='o',markersize=3,color='red')
+        plt.plot(mBest,min(errors),marker='o',markersize=3,color='red',label=f'Predicted Slope {mBest}')
+        plt.legend()
         plt.show()
         
     def gradient_descent(self):
@@ -69,7 +71,7 @@ class assignment:
 if __name__ == "__main__":
     slope = 10
     x = np.linspace(-10,10,100)
-    noise = np.random.normal(0,1,100)
+    noise = np.random.normal(0,5,100)
     data = assignment(slope,x,noise)
     data.visualise_data()
     data.linear_approach()
